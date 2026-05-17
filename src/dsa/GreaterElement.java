@@ -1,0 +1,42 @@
+package dsa;
+
+import java.util.Arrays;
+import java.util.Stack;
+
+public class GreaterElement {
+	
+	//find out next greater elements array
+	public static int[] nextGreater(int[] arr)
+	{
+		int n = arr.length;
+		//new array to store result
+		int res[] = new int[n];
+		//to help the elements to find out which is greater 
+		//create a stack
+		Stack<Integer> stack = new Stack();
+		for(int i=n-1;i>=0;i--) {
+			while(!stack.isEmpty() && stack.peek()<=arr[i]) {
+				stack.pop();
+			}
+			if(stack.isEmpty())
+			{
+				res[i] = -1;
+			}
+			else {
+				res[i] = stack.peek();
+			}
+			stack.push(arr[i]);
+		}
+		return res;
+	}
+	
+
+	public static void main(String[] args) {
+		int arr[] = {4,5,8,12,3,2,9,1}; 
+		System.out.println("original array :"+Arrays.toString(arr));
+		int result[] = nextGreater(arr);
+		System.out.println("result array: "+Arrays.toString(result));
+		
+	}
+
+}
